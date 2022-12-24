@@ -30,8 +30,19 @@ const addOrder = async(req,res)=>{
 const getOrders = async(req,res) => {
     try {
         const{orderer_id}=req.body;
-        console.log(orderer_id)
         const orders = await OrderSchems.find({orderer_id:"63930038423aaaf2a3d6df1d"});
+        return res.json(orders)
+    
+      } catch (error) {
+        console.log("error in getOrders",error.message)
+        return res.status(500).json({message:"Something went wrong in getting Orders"})
+    
+      }
+  }
+  const getIOrders = async(req,res) => {
+    try {
+        const id = req.params.id;
+        const orders = await OrderSchems.find({orderer_id:id});
         return res.json(orders)
     
       } catch (error) {
@@ -70,5 +81,5 @@ const updateOrderStatus=async(req,res)=>{
 
   }
 }
-  module.exports = { getOrders,addOrder,getAllOrders ,updateOrderStatus}
+  module.exports = { getOrders,addOrder,getAllOrders ,updateOrderStatus,getIOrders}
 
