@@ -27,7 +27,7 @@ app.get('/',(req,res)=>{
 })
 
 const PORT = process.env.PORT || 3000;
-
+mongoose.set("strictQuery", false);
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>{
     app.listen(PORT,()=>{
